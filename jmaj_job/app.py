@@ -49,7 +49,16 @@ st.title('Elektřina PST dashboard 📊')
 
 # Display average prices for each year
 st.write('## Průměrné ceny pro každý rok [Kč/MW]')
-st.line_chart(yearly_avg.set_index('Year')['Monthly_Average'])
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(yearly_avg['Year'], yearly_avg['Monthly_Average'], marker='o', label='Yearly Average')
+ax.set_xlabel('Year')
+ax.set_ylabel('Average Price')
+ax.set_title('Yearly Average Prices')
+ax.legend()
+ax.grid(True)
+ax.set_xticks(yearly_avg['Year'])
+ax.set_xticklabels(yearly_avg['Year'].astype(int), rotation=45)
+st.pyplot(fig)
 
 # Filter by year
 years = data['Year'].unique()
@@ -113,6 +122,8 @@ ax.set_ylabel('Average Price')
 ax.set_title('Yearly Average Prices')
 ax.legend()
 ax.grid(True)
+ax.set_xticks(yearly_avg['Year'])
+ax.set_xticklabels(yearly_avg['Year'].astype(int), rotation=45)
 st.pyplot(fig)
 
 # Add histogram of monthly prices
@@ -131,6 +142,8 @@ sns.boxplot(x='Year', y='Monthly_Average', data=data, ax=ax)
 ax.set_xlabel('Year')
 ax.set_ylabel('Monthly Average Price')
 ax.set_title('Box Plot of Monthly Average Prices by Year')
+ax.set_xticks(data['Year'].unique())
+ax.set_xticklabels(data['Year'].unique().astype(int), rotation=45)
 st.pyplot(fig)
 
 # Add bar chart of average prices by quarter for each year
@@ -140,6 +153,8 @@ sns.barplot(x='Year', y='Monthly_Average', hue='Quarter', data=quarterly_avg, ci
 ax.set_xlabel('Year')
 ax.set_ylabel('Average Price')
 ax.set_title('Average Prices by Quarter for Each Year')
+ax.set_xticks(data['Year'].unique())
+ax.set_xticklabels(data['Year'].unique().astype(int), rotation=45)
 st.pyplot(fig)
 
 # Add heatmap of monthly average prices
