@@ -8,6 +8,17 @@ from pygwalker.api.streamlit import StreamlitRenderer
 import streamlit as st
 
 
+# Adjust the width of the Streamlit page
+st.set_page_config(
+    page_title="Use Pygwalker In Streamlit",
+    layout="wide"
+    initial_sidebar_state=“auto”,
+    menu_items=None,
+)
+pyg_app = StreamlitRenderer(data)
+ 
+pyg_app.explorer()
+
 
 
 # Load the new data
@@ -54,15 +65,6 @@ yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
 
 # Streamlit app
 st.title('Elektřina PST dashboard 📊')
-
-# Adjust the width of the Streamlit page
-st.set_page_config(
-    page_title="Use Pygwalker In Streamlit",
-    layout="wide"
-)
-pyg_app = StreamlitRenderer(data)
- 
-pyg_app.explorer()
 
 
 
