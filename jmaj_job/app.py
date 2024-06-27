@@ -48,7 +48,7 @@ st.title('Electricity Prices with Quarterly, Monthly, and Yearly Averages')
 
 # Filter by year
 years = data['Year'].unique()
-selected_year = st.selectbox('Vyberte rok', years, layout='wide' )
+selected_year = st.selectbox('Vyberte rok 👉', years, layout='wide' )
 
 # Filter data based on selected year
 filtered_data = data[data['Year'] == selected_year]
