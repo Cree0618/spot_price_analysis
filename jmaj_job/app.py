@@ -16,8 +16,8 @@ st.set_page_config(
 
 
 # Load the new data
-#file_path = "jmaj_job/USETHIS_modifiedmesicni.csv"
-file_path = "MAIN_DATAFRAME_v2.csv"
+file_path = "jmaj_job/USETHIS_modifiedmesicni.csv"
+#file_path = "MAIN_DATAFRAME_v2.csv"
 
 data = pd.read_csv(file_path)
 
