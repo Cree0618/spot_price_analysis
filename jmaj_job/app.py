@@ -105,7 +105,7 @@ ax.grid(True)
 st.pyplot(fig)
 
 # Add monthly trend graph
-st.write('## Monthly Trend')
+st.write('## Průměrný měsíční trend')
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.plot(monthly_trend['Month'], monthly_trend['Monthly_Average'], marker='o', label='Monthly Trend')
 
@@ -117,7 +117,7 @@ ax.grid(True)
 st.pyplot(fig)
 
 # Add yearly average graph
-st.write('## Yearly Average Prices')
+st.write('## Průměrné roční ceny')
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.plot(yearly_avg['Year'], yearly_avg['Monthly_Average'], marker='o', label='Yearly Average')
 
