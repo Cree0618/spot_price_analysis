@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from streamlit import components
+
 # Load the new data
 file_path = "jmaj_job/USETHIS_modifiedmesicni.csv"
-#file_path = 'USETHIS_modifiedmesicni.csv'
 data = pd.read_csv(file_path)
 
 # Ensure data integrity by checking for duplicates and only working with the loaded rows
@@ -46,6 +46,10 @@ yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
 # Streamlit app
 st.title('Elektřina PST dashboard 📊')
 
+# Display average prices for each year
+st.write('## Průměrné ceny pro každý rok [Kč/MW]')
+st.line_chart(yearly_avg.set_index('Year')['Monthly_Average'])
+
 # Filter by year
 years = data['Year'].unique()
 selected_year = st.selectbox('Vyberte rok 👇', years)
@@ -86,7 +90,6 @@ st.pyplot(fig)
 st.write('## Průměrné ceny pro každý měsíc v průběhu let [Kč/MW]')
 st.line_chart(monthly_trend.set_index('Month')['Monthly_Average'])
 
-
 # Add monthly trend graph
 st.write('## Průměrný měsíční trend')
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -111,17 +114,13 @@ ax.legend()
 ax.grid(True)
 st.pyplot(fig)
 
-
-# dosplay the image měsíční_průměrná_hodinová_spotřeba.png
+# Display the image měsíční_průměrná_hodinová_spotřeba.png
 st.write('## Měsíční průměrná hodinová spotřeba Gamma')
 image_file = 'jmaj_job/měsíční_průměrná_hodinová_spotřeba.png'
 st.image(image_file)
 
-
 # Display the Plotly heatmap
 st.write('## Heatmapa SPOT cen v roce 2024')
-
-
 heatmap_file = 'jmaj_job/heatmap_price.html'  # Update with the actual path to your heatmap.html file
 with open(heatmap_file, 'r') as f:
     heatmap_html = f.read()
