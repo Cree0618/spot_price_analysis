@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from streamlit import components
-
+import pygwalker as pyg
 # Load the new data
 file_path = "jmaj_job/USETHIS_modifiedmesicni.csv"
 data = pd.read_csv(file_path)
@@ -47,6 +47,7 @@ yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
 # Streamlit app
 st.title('Elektřina PST dashboard 📊')
 
+walker = pyg.walk(data)
 # Display average prices for each year
 st.write('## Průměrné ceny pro každý rok [Kč/MW]')
 fig, ax = plt.subplots(figsize=(10, 6))
