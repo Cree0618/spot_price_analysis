@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from streamlit import components
 # Load the new data
 file_path = "jmaj_job/USETHIS_modifiedmesicni.csv"
 #file_path = 'USETHIS_modifiedmesicni.csv'
@@ -116,6 +116,8 @@ st.pyplot(fig)
 
 # Display the Plotly heatmap
 st.write('## Heatmapa SPOT cen v roce 2024')
+
+
 heatmap_file = 'src/heatmap_price.html'  # Update with the actual path to your heatmap.html file
 with open(heatmap_file, 'r') as f:
     heatmap_html = f.read()
