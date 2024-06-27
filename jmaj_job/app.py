@@ -126,7 +126,7 @@ st.components.v1.html(heatmap_html, height=900)
 heatmap_consumption_file = 'jmaj_job/heatmap_consumption.html'  # Update with the actual path to your heatmap.html file
 with open(heatmap_consumption_file, 'r') as f:
     heatmap_c_html = f.read()
-st.components.v1.html(heatmap_c_html, height=900)
+st.components.v1.html(heatmap_c_html)
 
 
 
