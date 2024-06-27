@@ -7,7 +7,12 @@ import pygwalker as pyg
 from pygwalker.api.streamlit import StreamlitRenderer
 import streamlit as st
 
-
+st.set_page_config(
+    page_title="Use Pygwalker In Streamlit",
+    layout="wide"
+    initial_sidebar_state=“auto”,
+    menu_items=None,
+)
 
 
 # Load the new data
@@ -52,12 +57,7 @@ yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
 
 
 # Adjust the width of the Streamlit page
-st.set_page_config(
-    page_title="Use Pygwalker In Streamlit",
-    layout="wide"
-    initial_sidebar_state=“auto”,
-    menu_items=None,
-)
+
 pyg_app = StreamlitRenderer(data)
  
 pyg_app.explorer()
