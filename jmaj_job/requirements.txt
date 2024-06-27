@@ -4,3 +4,4 @@ matplotlib
 plotly
 seaborn
 pygwalker
+streamlit

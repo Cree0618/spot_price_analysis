@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from streamlit import components
 import pygwalker as pyg
+from pygwalker.api.streamlit import StreamlitRenderer
+import streamlit as st
 # Load the new data
 file_path = "jmaj_job/USETHIS_modifiedmesicni.csv"
 data = pd.read_csv(file_path)
@@ -60,6 +62,10 @@ ax.grid(True)
 ax.set_xticks(yearly_avg['Year'])
 ax.set_xticklabels(yearly_avg['Year'].astype(int), rotation=45)
 st.pyplot(fig)
+
+pyg_app = StreamlitRenderer(data)
+ 
+pyg_app.explorer()
 
 # Filter by year
 years = data['Year'].unique()
