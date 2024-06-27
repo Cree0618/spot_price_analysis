@@ -89,7 +89,7 @@ st.pyplot(fig)
 # Show average prices for each month through the years
 st.write('## Průměrné ceny pro každý měsíc v průběhu let')
 st.line_chart(monthly_trend.set_index('Month')['Monthly_Average'])
-
+""""
 # Add comparison of quarters through the years
 st.write('## Srovnání kvartálů v průběhu let')
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -103,7 +103,7 @@ ax.set_title('Porovnání průměrných kvartálních cen v průběhu let')
 ax.legend()
 ax.grid(True)
 st.pyplot(fig)
-
+"""
 # Add monthly trend graph
 st.write('## Průměrný měsíční trend')
 fig, ax = plt.subplots(figsize=(10, 6))
