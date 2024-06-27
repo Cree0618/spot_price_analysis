@@ -47,18 +47,18 @@ yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
 st.title('Electricity Prices with Quarterly, Monthly, and Yearly Averages')
 
 # Display original data with quarterly averages
-st.write('## Data with Quarterly Averages')
+st.write('## Originální data s kvartálními průměry')
 st.write(data)
 
 # Filter by year
 years = data['Year'].unique()
-selected_year = st.selectbox('Select Year', years)
+selected_year = st.selectbox('Vyberte rok', years)
 
 # Filter data based on selected year
 filtered_data = data[data['Year'] == selected_year]
 
 # Display filtered data
-st.write(f'## Data for {selected_year}')
+st.write(f'## Data pro rok {selected_year}')
 st.write(filtered_data)
 
 # Plot the monthly average prices
@@ -87,11 +87,11 @@ ax.grid(True)
 st.pyplot(fig)
 
 # Show average prices for each month through the years
-st.write('## Average Prices for Each Month Through the Years')
+st.write('## Průměrné ceny pro každý měsíc v průběhu let')
 st.line_chart(monthly_trend.set_index('Month')['Monthly_Average'])
 
 # Add comparison of quarters through the years
-st.write('## Comparison of Quarters Through the Years')
+st.write('## Srovnání kvartálů v průběhu let')
 fig, ax = plt.subplots(figsize=(10, 6))
 for quarter in ['Q1', 'Q2', 'Q3', 'Q4']:
     quarterly_data = quarterly_avg[quarterly_avg['Quarter'] == quarter]
@@ -99,7 +99,7 @@ for quarter in ['Q1', 'Q2', 'Q3', 'Q4']:
 
 ax.set_xlabel('Year')
 ax.set_ylabel('Average Price')
-ax.set_title('Comparison of Quarterly Average Prices Through the Years')
+ax.set_title('Porovnání průměrných kvartálních cen v průběhu let')
 ax.legend()
 ax.grid(True)
 st.pyplot(fig)
