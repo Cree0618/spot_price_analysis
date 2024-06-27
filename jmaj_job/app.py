@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 from streamlit import components
 
 # Load the new data
@@ -112,6 +113,43 @@ ax.set_ylabel('Average Price')
 ax.set_title('Yearly Average Prices')
 ax.legend()
 ax.grid(True)
+st.pyplot(fig)
+
+# Add histogram of monthly prices
+st.write('## Histogram měsíčních cen')
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.hist(data['Monthly_Average'], bins=30, edgecolor='black')
+ax.set_xlabel('Monthly Average Price')
+ax.set_ylabel('Frequency')
+ax.set_title('Histogram of Monthly Average Prices')
+st.pyplot(fig)
+
+# Add box plot of monthly prices by year
+st.write('## Box plot měsíčních cen podle roku')
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.boxplot(x='Year', y='Monthly_Average', data=data, ax=ax)
+ax.set_xlabel('Year')
+ax.set_ylabel('Monthly Average Price')
+ax.set_title('Box Plot of Monthly Average Prices by Year')
+st.pyplot(fig)
+
+# Add bar chart of average prices by quarter for each year
+st.write('## Průměrné ceny podle čtvrtletí pro každý rok')
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.barplot(x='Year', y='Monthly_Average', hue='Quarter', data=quarterly_avg, ci=None, ax=ax)
+ax.set_xlabel('Year')
+ax.set_ylabel('Average Price')
+ax.set_title('Average Prices by Quarter for Each Year')
+st.pyplot(fig)
+
+# Add heatmap of monthly average prices
+st.write('## Heatmap průměrných měsíčních cen')
+heatmap_data = data.pivot_table(index='Year', columns='Month', values='Monthly_Average')
+fig, ax = plt.subplots(figsize=(12, 8))
+sns.heatmap(heatmap_data, annot=True, fmt=".1f", cmap="YlGnBu", ax=ax)
+ax.set_xlabel('Month')
+ax.set_ylabel('Year')
+ax.set_title('Heatmap of Monthly Average Prices')
 st.pyplot(fig)
 
 # Display the image měsíční_průměrná_hodinová_spotřeba.png
