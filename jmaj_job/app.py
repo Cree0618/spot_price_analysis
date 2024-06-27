@@ -90,11 +90,6 @@ st.pyplot(fig)
 st.write('## Průměrné ceny pro každý měsíc v průběhu let [Kč/MW]')
 st.line_chart(monthly_trend.set_index('Month')['Monthly_Average'])
 
-# dosplay the image měsíční_průměrná_hodinová_spotřeba.png
-st.write('## Měsíční průměrná hodinová spotřeba Gamma')
-image_file = 'jmaj_job/měsíční_průměrná_hodinová_spotřeba.png'
-st.image(image_file)
-
 
 # Add monthly trend graph
 st.write('## Průměrný měsíční trend')
@@ -119,6 +114,13 @@ ax.set_title('Yearly Average Prices')
 ax.legend()
 ax.grid(True)
 st.pyplot(fig)
+
+
+# dosplay the image měsíční_průměrná_hodinová_spotřeba.png
+st.write('## Měsíční průměrná hodinová spotřeba Gamma')
+image_file = 'jmaj_job/měsíční_průměrná_hodinová_spotřeba.png'
+st.image(image_file)
+
 
 # Display the Plotly heatmap
 st.write('## Heatmapa SPOT cen v roce 2024')
