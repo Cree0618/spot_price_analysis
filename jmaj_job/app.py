@@ -133,4 +133,4 @@ st.components.v1.html(heatmap_c_html, height=1200, width=1000)
 # dosplay the image měsíční_průměrná_hodinová_spotřeba.png
 st.write('## Měsíční průměrná hodinová spotřeba Gamma')
 image_file = 'jmaj_job/měsíční_průměrná_hodinová_spotřeba.png'
-st.image(image_file, use_column_width=True)
+st.image(image_file)
