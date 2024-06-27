@@ -90,6 +90,12 @@ st.pyplot(fig)
 st.write('## Průměrné ceny pro každý měsíc v průběhu let [Kč/MW]')
 st.line_chart(monthly_trend.set_index('Month')['Monthly_Average'])
 
+# dosplay the image měsíční_průměrná_hodinová_spotřeba.png
+st.write('## Měsíční průměrná hodinová spotřeba Gamma')
+image_file = 'jmaj_job/měsíční_průměrná_hodinová_spotřeba.png'
+st.image(image_file)
+
+
 # Add monthly trend graph
 st.write('## Průměrný měsíční trend')
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -127,8 +133,3 @@ heatmap_consumption_file = 'jmaj_job/heatmap_consumption.html'  # Update with th
 with open(heatmap_consumption_file, 'r') as f:
     heatmap_c_html = f.read()
 st.components.v1.html(heatmap_c_html, height=1200, width=1000, scrolling=True)
-
-# dosplay the image měsíční_průměrná_hodinová_spotřeba.png
-st.write('## Měsíční průměrná hodinová spotřeba Gamma')
-image_file = 'jmaj_job/měsíční_průměrná_hodinová_spotřeba.png'
-st.image(image_file)
