@@ -9,7 +9,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Use Pygwalker In Streamlit",
-    layout="wide"
+    layout="wide",
     
     menu_items=None,
 )
