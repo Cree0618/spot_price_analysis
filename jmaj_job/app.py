@@ -3,9 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from streamlit import components
-import pygwalker as pyg
-from pygwalker.api.streamlit import StreamlitRenderer
-import streamlit as st
+
 # Load the new data
 file_path = "jmaj_job/USETHIS_modifiedmesicni.csv"
 data = pd.read_csv(file_path)
@@ -49,23 +47,9 @@ yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
 # Streamlit app
 st.title('Elektřina PST dashboard 📊')
 
-walker = pyg.walk(data)
 # Display average prices for each year
 st.write('## Průměrné ceny pro každý rok [Kč/MW]')
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.plot(yearly_avg['Year'], yearly_avg['Monthly_Average'], marker='o', label='Yearly Average')
-ax.set_xlabel('Year')
-ax.set_ylabel('Average Price')
-ax.set_title('Yearly Average Prices')
-ax.legend()
-ax.grid(True)
-ax.set_xticks(yearly_avg['Year'])
-ax.set_xticklabels(yearly_avg['Year'].astype(int), rotation=45)
-st.pyplot(fig)
-
-pyg_app = StreamlitRenderer(data)
- 
-pyg_app.explorer()
+st.line_chart(yearly_avg.set_index('Year')['Monthly_Average'])
 
 # Filter by year
 years = data['Year'].unique()
@@ -129,8 +113,6 @@ ax.set_ylabel('Average Price')
 ax.set_title('Yearly Average Prices')
 ax.legend()
 ax.grid(True)
-ax.set_xticks(yearly_avg['Year'])
-ax.set_xticklabels(yearly_avg['Year'].astype(int), rotation=45)
 st.pyplot(fig)
 
 # Add histogram of monthly prices
@@ -149,8 +131,6 @@ sns.boxplot(x='Year', y='Monthly_Average', data=data, ax=ax)
 ax.set_xlabel('Year')
 ax.set_ylabel('Monthly Average Price')
 ax.set_title('Box Plot of Monthly Average Prices by Year')
-ax.set_xticks(data['Year'].unique())
-ax.set_xticklabels(data['Year'].unique().astype(int), rotation=45)
 st.pyplot(fig)
 
 # Add bar chart of average prices by quarter for each year
@@ -160,8 +140,6 @@ sns.barplot(x='Year', y='Monthly_Average', hue='Quarter', data=quarterly_avg, ci
 ax.set_xlabel('Year')
 ax.set_ylabel('Average Price')
 ax.set_title('Average Prices by Quarter for Each Year')
-ax.set_xticks(data['Year'].unique())
-ax.set_xticklabels(data['Year'].unique().astype(int), rotation=45)
 st.pyplot(fig)
 
 # Add heatmap of monthly average prices
