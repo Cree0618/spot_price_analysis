@@ -118,7 +118,7 @@ st.pyplot(fig)
 st.write('## Heatmapa SPOT cen v roce 2024')
 
 
-heatmap_file = 'src/heatmap_price.html'  # Update with the actual path to your heatmap.html file
+heatmap_file = 'jmaj_job/heatmap_price.html'  # Update with the actual path to your heatmap.html file
 with open(heatmap_file, 'r') as f:
     heatmap_html = f.read()
-components.html(heatmap_html, height=600)
+st.components.v1.html(heatmap_html, height=600)
