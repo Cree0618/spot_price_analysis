@@ -1,18 +1,52 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 
-# Load the data
-file_path = 'mesicni_ceny_a_kvartaly.csv'  # Update this with your actual file path
+# Load the new data
+file_path = 'USETHIS_modifiedmesicni.csv'
 data = pd.read_csv(file_path)
 
+# Ensure data integrity by checking for duplicates and only working with the loaded rows
+data = data.drop_duplicates()
+
 # Convert 'Date' column to datetime
-data['Date'] = pd.to_datetime(data['Date'], format='%Y-%m-%d')
+data['Date'] = pd.to_datetime(data['Date'], format='%Y-%m')
 
-# Display title
-st.title('Electricity Prices with Quarterly Averages')
+# Extract year and month from the 'Date' column
+data['Year'] = data['Date'].dt.year
+data['Month'] = data['Date'].dt.month
 
-# Display dataframe
-st.write('## Original Data')
+# Define a function to determine the quarter
+def get_quarter(month):
+    if month in [1, 2, 3]:
+        return 'Q1'
+    elif month in [4, 5, 6]:
+        return 'Q2'
+    elif month in [7, 8, 9]:
+        return 'Q3'
+    elif month in [10, 11, 12]:
+        return 'Q4'
+
+# Apply the function to create a 'Quarter' column
+data['Quarter'] = data['Month'].apply(get_quarter)
+
+# Calculate the average price for each quarter of each year
+quarterly_avg = data.groupby(['Year', 'Quarter'])['Monthly_Average'].mean().reset_index()
+
+# Merge the quarterly averages back into the original dataframe
+data = data.merge(quarterly_avg, on=['Year', 'Quarter'], suffixes=('', '_Quarter_Avg'))
+
+# Calculate the average price for each month across all years
+monthly_trend = data.groupby(['Month'])['Monthly_Average'].mean().reset_index()
+
+# Calculate the average price for each year
+yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
+
+# Streamlit app
+st.title('Electricity Prices with Quarterly, Monthly, and Yearly Averages')
+
+# Display original data with quarterly averages
+st.write('## Data with Quarterly Averages')
 st.write(data)
 
 # Filter by year
@@ -26,12 +60,69 @@ filtered_data = data[data['Year'] == selected_year]
 st.write(f'## Data for {selected_year}')
 st.write(filtered_data)
 
-# Plot the data
-st.write('## Monthly Average Prices')
+# Plot the monthly average prices
+st.write(f'## Měsíční průměrné ceny v roce {selected_year}')
 st.line_chart(filtered_data.set_index('Date')['Monthly_Average'])
 
-# Show quarterly averages
-st.write('## Quarterly Averages')
-quarters = ['Q1', 'Q2', 'Q3', 'Q4']
-quarterly_averages = filtered_data[quarters].mean()
+# Show quarterly averages for the selected year
+st.write(f'## Kvartální průměrná cena rok {selected_year}')
+quarterly_averages = filtered_data.groupby('Quarter')['Monthly_Average_Quarter_Avg'].mean()
 st.bar_chart(quarterly_averages)
+
+# Visualize the quarterly averages over the years
+st.write('## Kvartální ceny v průběhu let')
+fig, ax = plt.subplots(figsize=(10, 6))
+for quarter in ['Q1', 'Q2', 'Q3', 'Q4']:
+    if quarter in quarterly_avg['Quarter'].unique():
+        ax.plot(quarterly_avg[quarterly_avg['Quarter'] == quarter]['Year'], 
+                quarterly_avg[quarterly_avg['Quarter'] == quarter]['Monthly_Average'], 
+                marker='o', label=quarter)
+
+ax.set_xlabel('Year')
+ax.set_ylabel('Average Price')
+ax.set_title('Quarterly Average Prices')
+ax.legend()
+ax.grid(True)
+st.pyplot(fig)
+
+# Show average prices for each month through the years
+st.write('## Average Prices for Each Month Through the Years')
+st.line_chart(monthly_trend.set_index('Month')['Monthly_Average'])
+
+# Add comparison of quarters through the years
+st.write('## Comparison of Quarters Through the Years')
+fig, ax = plt.subplots(figsize=(10, 6))
+for quarter in ['Q1', 'Q2', 'Q3', 'Q4']:
+    quarterly_data = quarterly_avg[quarterly_avg['Quarter'] == quarter]
+    ax.plot(quarterly_data['Year'], quarterly_data['Monthly_Average'], marker='o', label=quarter)
+
+ax.set_xlabel('Year')
+ax.set_ylabel('Average Price')
+ax.set_title('Comparison of Quarterly Average Prices Through the Years')
+ax.legend()
+ax.grid(True)
+st.pyplot(fig)
+
+# Add monthly trend graph
+st.write('## Monthly Trend')
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(monthly_trend['Month'], monthly_trend['Monthly_Average'], marker='o', label='Monthly Trend')
+
+ax.set_xlabel('Month')
+ax.set_ylabel('Average Price')
+ax.set_title('Monthly Trend of Average Prices Across All Years')
+ax.legend()
+ax.grid(True)
+st.pyplot(fig)
+
+# Add yearly average graph
+st.write('## Yearly Average Prices')
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(yearly_avg['Year'], yearly_avg['Monthly_Average'], marker='o', label='Yearly Average')
+
+ax.set_xlabel('Year')
+ax.set_ylabel('Average Price')
+ax.set_title('Yearly Average Prices')
+ax.legend()
+ax.grid(True)
+st.pyplot(fig)
