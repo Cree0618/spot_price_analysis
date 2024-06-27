@@ -3,7 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the new data
-file_path = 'USETHIS_modifiedmesicni.csv'
+file_path = "/mount/src/spot_price_analysis/jmaj_job/USETHIS_modifiedmesicni.csv"
+#file_path = 'USETHIS_modifiedmesicni.csv'
 data = pd.read_csv(file_path)
 
 # Ensure data integrity by checking for duplicates and only working with the loaded rows
