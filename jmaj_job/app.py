@@ -126,7 +126,7 @@ st.components.v1.html(heatmap_html, height=900, width=1000)
 heatmap_consumption_file = 'jmaj_job/heatmap_consumption.html'  # Update with the actual path to your heatmap.html file
 with open(heatmap_consumption_file, 'r') as f:
     heatmap_c_html = f.read()
-st.components.v1.html(heatmap_c_html, height=1200, width=1000)
+st.components.v1.html(heatmap_c_html, height=1200, width=1000, scrolling=True)
 
 # dosplay the image měsíční_průměrná_hodinová_spotřeba.png
 st.write('## Měsíční průměrná hodinová spotřeba Gamma')
