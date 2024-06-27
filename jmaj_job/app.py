@@ -44,7 +44,7 @@ monthly_trend = data.groupby(['Month'])['Monthly_Average'].mean().reset_index()
 yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
 
 # Streamlit app
-st.title('Electricity Prices with Quarterly, Monthly, and Yearly Averages')
+st.title('Elektřina PST dashboard 📊')
 
 # Filter by year
 years = data['Year'].unique()
