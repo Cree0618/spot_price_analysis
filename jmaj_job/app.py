@@ -87,7 +87,7 @@ ax.grid(True)
 st.pyplot(fig)
 
 # Show average prices for each month through the years
-st.write('## Průměrné ceny pro každý měsíc v průběhu let')
+st.write('## Průměrné ceny pro každý měsíc v průběhu let [Kč/MW]')
 st.line_chart(monthly_trend.set_index('Month')['Monthly_Average'])
 
 # Add monthly trend graph
@@ -127,8 +127,6 @@ heatmap_consumption_file = 'jmaj_job/heatmap_consumption.html'  # Update with th
 with open(heatmap_consumption_file, 'r') as f:
     heatmap_c_html = f.read()
 st.components.v1.html(heatmap_c_html, height=1200, width=1000)
-
-
 
 # dosplay the image měsíční_průměrná_hodinová_spotřeba.png
 st.write('## Měsíční průměrná hodinová spotřeba Gamma')
