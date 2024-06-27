@@ -16,7 +16,9 @@ st.set_page_config(
 
 
 # Load the new data
-file_path = "jmaj_job/USETHIS_modifiedmesicni.csv"
+#file_path = "jmaj_job/USETHIS_modifiedmesicni.csv"
+file_path = "jmaj_job\MAIN_DATAFRAME_v2.csv"
+
 data = pd.read_csv(file_path)
 
 # Ensure data integrity by checking for duplicates and only working with the loaded rows
