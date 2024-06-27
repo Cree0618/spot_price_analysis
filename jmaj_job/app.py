@@ -8,17 +8,6 @@ from pygwalker.api.streamlit import StreamlitRenderer
 import streamlit as st
 
 
-# Adjust the width of the Streamlit page
-st.set_page_config(
-    page_title="Use Pygwalker In Streamlit",
-    layout="wide"
-    initial_sidebar_state=“auto”,
-    menu_items=None,
-)
-pyg_app = StreamlitRenderer(data)
- 
-pyg_app.explorer()
-
 
 
 # Load the new data
@@ -60,6 +49,19 @@ monthly_trend = data.groupby(['Month'])['Monthly_Average'].mean().reset_index()
 
 # Calculate the average price for each year
 yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
+
+
+# Adjust the width of the Streamlit page
+st.set_page_config(
+    page_title="Use Pygwalker In Streamlit",
+    layout="wide"
+    initial_sidebar_state=“auto”,
+    menu_items=None,
+)
+pyg_app = StreamlitRenderer(data)
+ 
+pyg_app.explorer()
+
 
 
 
