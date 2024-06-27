@@ -46,13 +46,9 @@ yearly_avg = data.groupby(['Year'])['Monthly_Average'].mean().reset_index()
 # Streamlit app
 st.title('Electricity Prices with Quarterly, Monthly, and Yearly Averages')
 
-# Display original data with quarterly averages
-st.write('## Originální data s kvartálními průměry')
-st.write(data)
-
 # Filter by year
 years = data['Year'].unique()
-selected_year = st.selectbox('Vyberte rok', years)
+selected_year = st.selectbox('Vyberte rok', years, layout='wide' )
 
 # Filter data based on selected year
 filtered_data = data[data['Year'] == selected_year]
