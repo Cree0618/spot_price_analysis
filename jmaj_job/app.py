@@ -10,8 +10,8 @@ from pygwalker.api.streamlit import StreamlitRenderer
 import streamlit as st
 
 st.set_page_config(
-    page_title="Use Pygwalker In Streamlit",
-    layout="wide",
+    page_title="Elektřina PST dashboard",
+    layout="centered",
     
     menu_items=None,
 )
