@@ -210,4 +210,4 @@ st.write('## Gamma Heatmapa spotřeby v roce 2024')
 heatmap_consumption_file = 'jmaj_job/heatmap_consumption.html'  # Update with the actual path to your heatmap.html file
 with open(heatmap_consumption_file, 'r') as f:
     heatmap_c_html = f.read()
-st.components.v1.html(heatmap_c_html, height=1200, width=1000, scrolling=True)
+st.components.v1.html(heatmap_c_html, height=2000, width=1000, scrolling=True)
