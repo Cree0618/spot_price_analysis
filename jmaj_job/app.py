@@ -11,7 +11,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Elektřina PST dashboard",
-    layout="centered",
+    layout="wide",
     
     menu_items=None,
 )
