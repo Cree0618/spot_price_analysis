@@ -204,10 +204,10 @@ st.write('## Heatmapa SPOT cen v roce 2024')
 heatmap_file = 'jmaj_job/heatmap_price.html'  # Update with the actual path to your heatmap.html file
 with open(heatmap_file, 'r') as f:
     heatmap_html = f.read()
-st.components.v1.html(heatmap_html, height=900, width=1000)
+st.components.v1.html(heatmap_html, height=2000, width=1000)
 
 st.write('## Gamma Heatmapa spotřeby v roce 2024')
 heatmap_consumption_file = 'jmaj_job/heatmap_consumption.html'  # Update with the actual path to your heatmap.html file
 with open(heatmap_consumption_file, 'r') as f:
     heatmap_c_html = f.read()
-st.components.v1.html(heatmap_c_html, height=1700, width=1000)
+st.components.v1.html(heatmap_c_html, height=2000, width=1000)
